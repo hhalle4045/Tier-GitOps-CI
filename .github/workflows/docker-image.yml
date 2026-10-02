@@ -184,7 +184,7 @@ jobs:
                | .spec.template.spec.containers[]
                | select(.name=="backend")
                | .image)
-            = "adijaiswal/backend:" + strenv(IMAGE_TAG)
+            = "hhalle/backend:" + strenv(IMAGE_TAG)
           ' k8s-prod/backend.yaml
 
           # -- Update ONLY Deployment images (frontend)
@@ -193,14 +193,14 @@ jobs:
                | .spec.template.spec.containers[]
                | select(.name=="frontend")
                | .image)
-            = "adijaiswal/frontend:" + strenv(IMAGE_TAG)
+            = "hhalle/frontend:" + strenv(IMAGE_TAG)
           ' k8s-prod/frontend.yaml
 
       - name: Commit & push to CD repo
         working-directory: cd
         run: |
-          git config user.name "ci-bot"
-          git config user.email "ci-bot@users.noreply.github.com"
+          git config user.name "hhalle4045"
+          git config user.email "hhalle4045.com"
           git add -A
           git commit -m "bump images to ${IMAGE_TAG}" || echo "no changes"
           git push
